@@ -1,0 +1,90 @@
+{% extends "layout.html" %} {% block body %}
+<title>Edit Transaction</title>
+<script>
+  $(function() {
+    $("#category").val('{{ transaction.category }}');
+});
+</script>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 py-2">
+      <h3 class="text-secondary text-uppercase text-center">
+        Edit Transaction
+      </h3>
+      <br />
+      <form action="{{ url_for('updateTransaction', id=transaction.id) }}" method="post" class="pb-5">
+        <div class="form-group">
+          <label for="date">Date (DD/MM/YY)</label>
+          <input
+            type="date"
+            name="date"
+            class="form-control"
+            value="{{ transaction.date }}"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="transaction_name">Transaction Name</label>
+          <input
+            type="text"
+            name="transaction_name"
+            class="form-control"
+            value="{{ transaction.transaction_name }}"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            name="amount"
+            class="form-control"
+            value="{{ transaction.amount }}"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select
+            id="category"
+            name="category"
+            class="form-control"
+          >
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="send">Send To</label>
+          <input
+            type="text"
+            name="sendTo"
+            class="form-control"
+            value="{{ transaction.sendTo }}"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="receive">Receive From</label>
+          <input
+            type="text"
+            name="receiveFrom"
+            class="form-control"
+            value="{{ transaction.receiveFrom }}"
+          />
+        </div>
+        <br />
+        <input
+          type="submit"
+          value="Update"
+          class="btn btn-dark my-2 text-uppercase"
+        />
+        <a href="/transaction" class="btn btn-info">CANCEL</a>
+      </form>
+    </div>
+    <br />
+  </div>
+</div>
+
+{% endblock %}

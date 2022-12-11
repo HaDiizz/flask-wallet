@@ -1,0 +1,121 @@
+{% extends "layout.html" %} {% block body %}
+<title>Home</title>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 py-2">
+      <h3 class="text-secondary text-uppercase">Create Transaction</h3>
+      <br />
+      {% for message in get_flashed_messages() %} {% if isError %}
+      <div class="alert alert-danger alert-dismissible fade show">
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% else %}
+      <div class="alert alert-success alert-dismissible fade show">
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endif %} {% endfor %}
+      <form action="/createTransaction" method="post" class="pb-5">
+        <div class="form-group">
+          <label for="date">Date (DD/MM/YY)</label>
+          <input type="date" name="date" class="form-control" />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="transaction_name">Transaction Name</label>
+          <input type="text" name="transaction_name" class="form-control" />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <!-- <input
+            type="number"
+            name="amount"
+            class="form-control"
+            min="0"
+            value="0"
+            onchange="this.value = Math.floor(Math.max(this.value,0))"
+          /> -->
+          <input
+            type="number"
+            name="amount"
+            class="form-control"
+            value="0"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select name="category" class="form-control">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="send">Send To</label>
+          <input type="text" name="sendTo" class="form-control" />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="receive">Receive From</label>
+          <input type="text" name="receiveFrom" class="form-control" />
+        </div>
+        <br />
+        <input
+          type="submit"
+          value="Create"
+          class="btn btn-dark my-2 text-uppercase"
+        />
+      </form>
+    </div><br/><br/>
+    <div class="col-md-6 py-2 text-center">
+      <h3 class="text-center pl-5 pr-5 pb-3 text-secondary text-uppercase">Dashboard Detail</h3>
+      <div class="d-grid gap-3">
+        <div class="col-sm-12 d-flex justify-content-center">
+          <div class="card bg-primary w-50">
+            <div class="card-body">
+              <h5 class="card-title text-uppercase text-white">My Balance</h5>
+              <p class="card-text text-white">
+                {{ balance }} ฿
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+          <div class="card bg-success w-50">
+            <div class="card-body">
+              <h5 class="card-title text-uppercase text-white">income</h5>
+              <p class="card-text text-white">
+                {{ income }} ฿
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+          <div class="card bg-danger w-50">
+            <div class="card-body">
+              <h5 class="card-title text-uppercase text-white">expense</h5>
+              <p class="card-text text-white">
+                {{ expense }} ฿
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

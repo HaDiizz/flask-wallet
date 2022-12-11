@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300&display=swap');
+html,
+body {
+  font-family: 'Prompt', sans-serif;
+  background-color: #fff;
+  color: black;
+}
+
+/* DARK MODE */
+html.dark-mode {
+  filter: invert(100%);
+  color-scheme: dark;
+}
+html.dark-mode img {
+  filter: invert(100%);
+}
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+/* SCROLL BAR */
+/* ::-webkit-scrollbar {
+  width: 6px;
+} */
+/* ::-webkit-scrollbar-thumb {
+  background-color: rgb(205, 205, 205);
+  border-radius: 40px;
+} */
+/* ::-webkit-scrollbar-track {
+  background-color: transparent;
+} */
+
+/* NAVBAR */
+.navbar {
+  backdrop-filter: blur(5px);
+}
+
+/* AVATAR */
+.medium-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid rgb(118, 118, 118);
+}
+.super-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid rgb(118, 118, 118);
+}

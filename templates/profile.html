@@ -1,0 +1,82 @@
+{% extends "layout.html" %} {% block body %}
+<title>Profile</title>
+<div class="container pb-4">
+  <h1 class="text-center pb-1">Profile</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <form
+        action="{{ url_for('updateProfile') }}"
+        class="form-control pb-4"
+        method="post"
+      >
+        {% for message in get_flashed_messages() %} {% if isError %}
+        <div class="alert alert-danger alert-dismissible fade show">
+          {{ message }}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show">
+          {{ message }}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endif %} {% endfor %}
+        <div class="d-flex justify-content-center pb-4 pt-2">
+          <img
+            class="super-avatar"
+            src="{{ profile.avatar if profile.avatar else '../static/images/user.png'}}"
+            alt="avatar"
+          />
+        </div>
+        <input
+          type="submit"
+          class="btn btn-outline-info position-relative"
+          value="UPDATE"
+        /><br />
+        <div class="form-group pt-3 pb-3">
+          <label for="current_password"
+            >Current Password <span class="text-danger" >*</span></label
+          ><br />
+          <input type="password" name="current_password" class="form-control" />
+        </div>
+        <hr style="border: 2px solid rgb(99, 99, 99)" />
+        <div class="form-group pt-2">
+          <label for="username">Username</label><br />
+          <input
+            type="text"
+            name="username"
+            value="{{ profile.username }}"
+            class="form-control"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="email">Email</label><br />
+          <input
+            type="email"
+            name="email"
+            value="{{ profile.email }}"
+            class="form-control"
+            disabled
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="new_password">New Password</label><br />
+          <input type="password" name="password" class="form-control" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

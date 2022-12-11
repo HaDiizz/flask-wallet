@@ -1,0 +1,79 @@
+{% extends "layout.html" %} {% block body %}
+<title>Transaction</title>
+<div id="loading" style="height:100%; width:100%; position:absolute; left:46%; top:46%; margin-left: -50px; margin-top: -50px; display: none;">
+  <img src="../static/images/loading.gif" alt="loading"  />
+</div>
+<div class="container">
+  <h1 class="text-center pb-5">Transaction</h1>
+  {% for message in get_flashed_messages() %} {% if isError %}
+  <div class="alert alert-danger alert-dismissible fade show">
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% else %}
+  <div class="alert alert-success alert-dismissible fade show">
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %} {% endfor %}
+  <div class="container table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-uppercase">
+          <th>ID</th>
+          <th>Transaction Name</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Send To</th>
+          <th>Receive From</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in transactions %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.transaction_name }}</td>
+          <td>{{ item.amount | currencyFormat }}</td>
+          <td>
+            <span
+              class="text-uppercase badge {{ 'bg-success' if item.category == 'income' else 'bg-danger' }}"
+              >{{ item.category }}</span
+            >
+          </td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.sendTo if item.sendTo else '-' }}</td>
+          <td>{{ item.receiveFrom if item.receiveFrom else '-'}}</td>
+          <td>
+            <a class="btn btn-primary" href="/edit/{{ item.id }}"
+              ><i class="fa-solid fa-pen-to-square"></i
+            ></a>
+          </td>
+          <td>
+            <a
+              class="btn btn-danger"
+              href="/delete/{{ item.id }}"
+              onclick="$('#loading').show();"
+              ><i class="fa-solid fa-trash"></i
+            ></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
